@@ -1,2 +1,4 @@
-package com.odkhang.luanvan.model;public class InfoHotel {
+package com.odkhang.luanvan.model;
+
+public class InfoHotel {
 }

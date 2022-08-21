@@ -1,2 +1,4 @@
-package com.odkhang.luanvan.controller;public class MainController {
+package com.odkhang.luanvan.controller;
+
+public class MainController {
 }
