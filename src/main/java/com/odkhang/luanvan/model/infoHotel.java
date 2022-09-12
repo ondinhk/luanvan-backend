@@ -4,11 +4,10 @@ package com.odkhang.luanvan.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
-@Document(value = "house")
-public class InfoHotel {
+@Document(value = "infoHotels")
+public class infoHotel {
     @Id
+    private String id;
     private String idHouse;
     private String title;
     private String linkBooking;
@@ -107,6 +106,7 @@ public class InfoHotel {
     public void setLabel_rate(String label_rate) {
         this.label_rate = label_rate;
     }
+
     public String getIdHouse() {
         return idHouse;
     }

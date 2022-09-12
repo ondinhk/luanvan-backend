@@ -1,9 +1,9 @@
 package com.odkhang.luanvan.service;
 
-import com.odkhang.luanvan.model.InfoHotel;
+import com.odkhang.luanvan.model.infoHotel;
 
 import java.util.List;
 
 public interface IInfoHotelService {
-    List<InfoHotel> getAllHotel();
+    List<infoHotel> getAllHotel();
 }
