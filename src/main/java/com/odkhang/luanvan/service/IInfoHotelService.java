@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IInfoHotelService {
     List<InfoHotel> getAllHotel();
+
+    List<InfoHotel> getLimitHotel();
+
+    InfoHotel getOneHotel(Long idHouse, Long idLocation);
 }

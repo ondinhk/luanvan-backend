@@ -17,4 +17,14 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
     public List<InfoHotel> getAllHotel() {
         return infoHotelRepo.findAll();
     }
+
+    @Override
+    public List<InfoHotel> getLimitHotel() {
+        return null;
+    }
+
+    @Override
+    public InfoHotel getOneHotel(Long idHouse, Long idLocation) {
+        return infoHotelRepo.getOneHotel(idHouse, idLocation);
+    }
 }

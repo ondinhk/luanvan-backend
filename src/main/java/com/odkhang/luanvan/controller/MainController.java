@@ -51,4 +51,19 @@ public class MainController {
         }
     }
 
+    @GetMapping("/hotel")
+    @ResponseBody
+    ResponseEntity<InfoHotel> getHotel(@RequestParam Long idHouse, @RequestParam Long idLocation) {
+        try {
+            InfoHotel infoHotel = infoHotelService.getOneHotel(idHouse, idLocation);
+            if (infoHotel == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(infoHotel);
+            }
+        } catch (Exception e) {
+            System.out.println("Cannot get hotel locations" + e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

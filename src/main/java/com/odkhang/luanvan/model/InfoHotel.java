@@ -6,18 +6,19 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(value = "Hotels")
+@Document(value = "InfoHotels")
 public class InfoHotel {
     @Id
     private String id;
-    private String idHouse;
+    private Long idHouse;
+    private Long idLocation;
     private String name;
-    private Object images;
+    private String address;
     private String costOriginal;
     private String costNew;
     private String numberOfComment;
     private String rate;
     private String label;
-    private int category;
     private String description;
+    private Object images;
 }
