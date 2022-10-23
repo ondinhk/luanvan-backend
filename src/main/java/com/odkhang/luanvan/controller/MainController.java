@@ -5,6 +5,9 @@ import com.odkhang.luanvan.model.LocationHotel;
 import com.odkhang.luanvan.service.IInfoHotelService;
 import com.odkhang.luanvan.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +64,23 @@ public class MainController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             } else {
                 return ResponseEntity.status(HttpStatus.OK).body(infoHotel);
+            }
+        } catch (Exception e) {
+            System.out.println("Cannot get hotel locations" + e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/getListHotels")
+    @ResponseBody
+    ResponseEntity<Page<InfoHotel>> getListHotels(@RequestParam int page, @RequestParam int size){
+        try {
+            Pageable firstPageWithSizeElement = PageRequest.of(page, size);
+            Page<InfoHotel> listHotels = infoHotelService.allHotels(firstPageWithSizeElement);
+            if (listHotels == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(listHotels);
             }
         } catch (Exception e) {
             System.out.println("Cannot get hotel locations" + e);
