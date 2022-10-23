@@ -19,23 +19,7 @@ public class MainController {
     @Autowired
     ILocationService locationService;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    @ResponseBody
-    ResponseEntity<List<InfoHotel>> getAll() {
-        try {
-            List<InfoHotel> infoAll = infoHotelService.getAllHotel();
-            if (infoAll.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            } else {
-                return ResponseEntity.status(HttpStatus.OK).body(infoAll);
-            }
-        } catch (Exception e) {
-            System.out.println("Cannot get all info " + e);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
-
-    @RequestMapping(value = "/getLocations", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllLocations", method = RequestMethod.GET)
     @ResponseBody
     ResponseEntity<List<LocationHotel>> getAllLocations() {
         try {
@@ -47,6 +31,23 @@ public class MainController {
             }
         } catch (Exception e) {
             System.out.println("Cannot get all locations" + e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @RequestMapping(value = "/getLocation", method = RequestMethod.GET)
+    @ResponseBody
+    ResponseEntity<LocationHotel> getLocation(@RequestParam int idLocation) {
+        try {
+            LocationHotel location = locationService.getLocation(idLocation);
+
+            if (location == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(location);
+            }
+        } catch (Exception e) {
+            System.out.println("Cannot get location" + e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }

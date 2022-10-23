@@ -18,4 +18,9 @@ public class LocationServiceImlp implements ILocationService {
     public List<LocationHotel> getAllLocation() {
         return locationsRepository.findAll();
     }
+
+    @Override
+    public LocationHotel getLocation(int idLocation) {
+        return locationsRepository.findByIdLocation(idLocation);
+    }
 }
