@@ -1,6 +1,5 @@
 package com.odkhang.luanvan.repository;
 
-import com.odkhang.luanvan.model.InfoHotel;
 import com.odkhang.luanvan.model.LocationHotel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

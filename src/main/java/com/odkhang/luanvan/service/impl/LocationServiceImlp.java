@@ -4,6 +4,7 @@ import com.odkhang.luanvan.model.LocationHotel;
 import com.odkhang.luanvan.repository.ILocationsRepository;
 import com.odkhang.luanvan.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

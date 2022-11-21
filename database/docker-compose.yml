@@ -3,8 +3,10 @@ services:
   mongo:
     image: mongo
     restart: always
+    volumes:
+      - ./data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: odkhang123
     ports:
-      - 27017:8081
+      - 27017:27017

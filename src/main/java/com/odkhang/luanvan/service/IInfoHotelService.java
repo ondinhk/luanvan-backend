@@ -1,11 +1,18 @@
 package com.odkhang.luanvan.service;
 
-import com.odkhang.luanvan.model.InfoHotel;
+import com.odkhang.luanvan.model.InfoHotels;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IInfoHotelService {
-    InfoHotel getOneHotel(Long idHouse, Long idLocation);
+import java.util.List;
 
-    Page<InfoHotel> allHotels(Pageable p);
+public interface IInfoHotelService {
+    InfoHotels getHotel(String idHouse);
+
+    Page<InfoHotels> getAllHotels(Pageable p);
+
+    Page<InfoHotels> findAllByIdLocation(int idLocation, Pageable p);
+
+    List<InfoHotels> recommendHotelsMachine(String input, String size, String isSearch);
+
 }
