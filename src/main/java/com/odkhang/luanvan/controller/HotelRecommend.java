@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/machines")
@@ -21,9 +22,12 @@ public class HotelRecommend {
 
     @PostMapping("/recommend")
     @ResponseBody
-    ResponseEntity<List<InfoHotels>> recommend(@RequestParam String input, @RequestParam String size, @RequestParam String isSearch) {
+    ResponseEntity<List<InfoHotels>> recommend(@RequestBody Map<String, String> input_user) {
         try {
-            List<InfoHotels> response = infoHotelService.recommendHotelsMachine(input, size, isSearch);
+            String input = input_user.get("input");
+            String size = input_user.get("size");
+            String idLocation = input_user.get("idLocation");
+            List<InfoHotels> response = infoHotelService.recommendHotelsMachine(input, size, idLocation);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println("Cannot get hotel locations" + e);

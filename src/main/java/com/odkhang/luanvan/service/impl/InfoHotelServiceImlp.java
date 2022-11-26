@@ -42,8 +42,8 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
     }
 
     @Override
-    public List<InfoHotels> recommendHotelsMachine(String input, String size, String isSearch) {
-        String[] listIdHotel = getListIdHotelFromMachine(input, size, isSearch);
+    public List<InfoHotels> recommendHotelsMachine(String input, String size, String idLocation) {
+        String[] listIdHotel = getListIdHotelFromMachine(input, size, idLocation);
         List<InfoHotels> listHotels = new ArrayList<InfoHotels>();
         for (String id : listIdHotel) {
             InfoHotels tmpHotels = infoHotelRepo.findHotelById(id);
@@ -52,7 +52,7 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
         return listHotels;
     }
 
-    private String[] getListIdHotelFromMachine(String input, String size, String isSearch) {
+    private String[] getListIdHotelFromMachine(String input, String size, String idLocation) {
         String url = "http://127.0.0.1:5000/recommend";
         try {
             URI uri = new URI(url);
@@ -65,7 +65,7 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("input", input);
         map.add("size", size);
-        map.add("isSearch", isSearch);
+        map.add("idLocation", idLocation);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
         ResponseEntity<String[]> response = restTemplate.postForEntity(url, request, String[].class);

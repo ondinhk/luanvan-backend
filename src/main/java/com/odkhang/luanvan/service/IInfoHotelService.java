@@ -13,6 +13,6 @@ public interface IInfoHotelService {
 
     Page<InfoHotels> findAllByIdLocation(int idLocation, Pageable p);
 
-    List<InfoHotels> recommendHotelsMachine(String input, String size, String isSearch);
+    List<InfoHotels> recommendHotelsMachine(String input, String size, String idLocation);
 
 }
