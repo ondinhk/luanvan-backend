@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class HotelsController {
 
     @GetMapping("/getAllHotels")
     @ResponseBody
-    ResponseEntity<Page<InfoHotels>> getListHotels(@RequestParam int page, @RequestParam int size){
+    ResponseEntity<Page<InfoHotels>> getListHotels(@RequestParam int page, @RequestParam int size) {
         try {
             Pageable queryPage = PageRequest.of(page, size);
             Page<InfoHotels> listHotels = infoHotelService.getAllHotels(queryPage);
@@ -52,9 +53,15 @@ public class HotelsController {
     @GetMapping("/getAllHotelsByLocation")
     @ResponseBody
     ResponseEntity<Page<InfoHotels>> getAllHotelsByLocation(@RequestParam int page, @RequestParam int size
-            , @RequestParam int idLocation){
+            , @RequestParam int idLocation, @RequestParam String filterCommend) {
         try {
-            Pageable queryPage = PageRequest.of(page, size);
+            // Min Cost
+            Pageable queryPage;
+            if (filterCommend.equals("maxComment")) {
+                queryPage = PageRequest.of(page, size, Sort.by("number_reviews").descending());
+            } else {
+                queryPage = PageRequest.of(page, size, Sort.by("rate").descending());
+            }
             Page<InfoHotels> listHotels = infoHotelService.findAllByIdLocation(idLocation, queryPage);
             if (listHotels == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -4,13 +4,10 @@ package com.odkhang.luanvan.controller;
 import com.odkhang.luanvan.model.InfoHotels;
 import com.odkhang.luanvan.service.IInfoHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +27,7 @@ public class HotelRecommend {
             List<InfoHotels> response = infoHotelService.recommendHotelsMachine(input, size, idLocation);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            System.out.println("Cannot get hotel locations" + e);
+            System.out.println("Wrong recommend" + e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
