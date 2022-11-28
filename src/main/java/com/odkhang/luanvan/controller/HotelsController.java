@@ -59,6 +59,10 @@ public class HotelsController {
             Pageable queryPage;
             if (filterCommend.equals("maxComment")) {
                 queryPage = PageRequest.of(page, size, Sort.by("number_reviews").descending());
+            } else if (filterCommend.equals("maxCost")) {
+                queryPage = PageRequest.of(page, size, Sort.by("costOriginal").descending());
+            } else if (filterCommend.equals("minCost")) {
+                queryPage = PageRequest.of(page, size, Sort.by("costOriginal"));
             } else {
                 queryPage = PageRequest.of(page, size, Sort.by("rate").descending());
             }
