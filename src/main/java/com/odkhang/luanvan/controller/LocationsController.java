@@ -48,6 +48,20 @@ public class LocationsController {
         }
     }
 
-
+    @RequestMapping(value = "/getValueChartLocations", method = RequestMethod.GET)
+    @ResponseBody
+    ResponseEntity<List<Object>> getValueChartLocations() {
+        try {
+            List<Object> locations = locationService.getValueChartLocations();
+            if (locations == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(locations);
+            }
+        } catch (Exception e) {
+            System.out.println("Cannot get all locations" + e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 }

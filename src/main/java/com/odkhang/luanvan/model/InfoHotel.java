@@ -6,11 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.List;
-
 @Data
-@Document(value = "InfoHotels")
-public class InfoHotels {
+@Document(value = "Hotels")
+public class InfoHotel {
     @Id
     private String id;
     @Field(value = "name")
@@ -18,12 +16,14 @@ public class InfoHotels {
     private Long idLocation;
     private String idLocationName;
     private String address;
-    @Field(value = "cost_original" )
+    @Field(value = "geo_code")
+    private Object geoCode;
+    @Field(value = "cost_original")
     private String costOriginal;
     @Field(value = "cost_sale")
     private String costSale;
     private float rate;
-    private int number_reviews;
+    public int number_reviews;
     private String description;
     @Field(value = "facility")
     private Object facility;

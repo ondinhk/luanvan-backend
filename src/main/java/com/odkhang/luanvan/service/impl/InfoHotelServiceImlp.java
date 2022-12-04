@@ -1,6 +1,6 @@
 package com.odkhang.luanvan.service.impl;
 
-import com.odkhang.luanvan.model.InfoHotels;
+import com.odkhang.luanvan.model.InfoHotel;
 import com.odkhang.luanvan.repository.IInfoHotelRepository;
 import com.odkhang.luanvan.service.IInfoHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -27,29 +26,40 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
     IInfoHotelRepository infoHotelRepo;
 
     @Override
-    public InfoHotels getHotel(String idHotel) {
+    public InfoHotel getHotel(String idHotel) {
         return infoHotelRepo.findHotelById(idHotel);
     }
 
     @Override
-    public Page<InfoHotels> getAllHotels(Pageable p) {
+    public Page<InfoHotel> getAllHotels(Pageable p) {
         return infoHotelRepo.findAll(p);
     }
 
     @Override
-    public Page<InfoHotels> findAllByIdLocation(int idLocation, Pageable p) {
+    public Page<InfoHotel> findAllByIdLocation(int idLocation, Pageable p) {
         return infoHotelRepo.findByIdLocation(idLocation, p);
     }
 
     @Override
-    public List<InfoHotels> recommendHotelsMachine(String input, String size, String idLocation) {
+    public List<InfoHotel> recommendHotelsMachine(String input, String size, String idLocation) {
         String[] listIdHotel = getListIdHotelFromMachine(input, size, idLocation);
-        List<InfoHotels> listHotels = new ArrayList<InfoHotels>();
+        List<InfoHotel> listHotels = new ArrayList<InfoHotel>();
         for (String id : listIdHotel) {
-            InfoHotels tmpHotels = infoHotelRepo.findHotelById(id);
+            InfoHotel tmpHotels = infoHotelRepo.findHotelById(id);
             listHotels.add(tmpHotels);
         }
+        listHotels.sort(new Comparator<InfoHotel>() {
+            @Override
+            public int compare(InfoHotel o1, InfoHotel o2) {
+                return o2.getNumber_reviews() - o1.getNumber_reviews();
+            }
+        });
         return listHotels;
+    }
+
+    @Override
+    public Long countNumberHotelInLocation(Long idLocation) {
+        return infoHotelRepo.countNumberHotelInLocation(idLocation);
     }
 
     private String[] getListIdHotelFromMachine(String input, String size, String idLocation) {

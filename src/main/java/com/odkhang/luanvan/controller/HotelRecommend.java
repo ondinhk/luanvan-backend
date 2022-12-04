@@ -1,7 +1,7 @@
 package com.odkhang.luanvan.controller;
 
 
-import com.odkhang.luanvan.model.InfoHotels;
+import com.odkhang.luanvan.model.InfoHotel;
 import com.odkhang.luanvan.service.IInfoHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class HotelRecommend {
 
     @PostMapping("/recommend")
     @ResponseBody
-    ResponseEntity<List<InfoHotels>> recommend(@RequestBody Map<String, String> input_user) {
+    ResponseEntity<List<InfoHotel>> recommend(@RequestBody Map<String, String> input_user) {
         try {
             String input = input_user.get("input");
             String size = input_user.get("size");
             String idLocation = input_user.get("idLocation");
-            List<InfoHotels> response = infoHotelService.recommendHotelsMachine(input, size, idLocation);
+            List<InfoHotel> response = infoHotelService.recommendHotelsMachine(input, size, idLocation);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println("Wrong recommend" + e);

@@ -1,6 +1,6 @@
 package com.odkhang.luanvan.controller;
 
-import com.odkhang.luanvan.model.InfoHotels;
+import com.odkhang.luanvan.model.InfoHotel;
 import com.odkhang.luanvan.service.IInfoHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,13 +19,13 @@ public class HotelsController {
 
     @GetMapping("/getHotel")
     @ResponseBody
-    ResponseEntity<InfoHotels> getHotel(@RequestParam String idHotel) {
+    ResponseEntity<InfoHotel> getHotel(@RequestParam String idHotel) {
         try {
-            InfoHotels infoHotels = infoHotelService.getHotel(idHotel);
-            if (infoHotels == null) {
+            InfoHotel infoHotel = infoHotelService.getHotel(idHotel);
+            if (infoHotel == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             } else {
-                return ResponseEntity.status(HttpStatus.OK).body(infoHotels);
+                return ResponseEntity.status(HttpStatus.OK).body(infoHotel);
             }
         } catch (Exception e) {
             System.out.println("Cannot get hotel locations" + e);
@@ -35,10 +35,10 @@ public class HotelsController {
 
     @GetMapping("/getAllHotels")
     @ResponseBody
-    ResponseEntity<Page<InfoHotels>> getListHotels(@RequestParam int page, @RequestParam int size) {
+    ResponseEntity<Page<InfoHotel>> getListHotels(@RequestParam int page, @RequestParam int size) {
         try {
             Pageable queryPage = PageRequest.of(page, size);
-            Page<InfoHotels> listHotels = infoHotelService.getAllHotels(queryPage);
+            Page<InfoHotel> listHotels = infoHotelService.getAllHotels(queryPage);
             if (listHotels == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             } else {
@@ -52,7 +52,7 @@ public class HotelsController {
 
     @GetMapping("/getAllHotelsByLocation")
     @ResponseBody
-    ResponseEntity<Page<InfoHotels>> getAllHotelsByLocation(@RequestParam int page, @RequestParam int size
+    ResponseEntity<Page<InfoHotel>> getAllHotelsByLocation(@RequestParam int page, @RequestParam int size
             , @RequestParam int idLocation, @RequestParam String filterCommend) {
         try {
             // Min Cost
@@ -66,7 +66,7 @@ public class HotelsController {
             } else {
                 queryPage = PageRequest.of(page, size, Sort.by("rate").descending());
             }
-            Page<InfoHotels> listHotels = infoHotelService.findAllByIdLocation(idLocation, queryPage);
+            Page<InfoHotel> listHotels = infoHotelService.findAllByIdLocation(idLocation, queryPage);
             if (listHotels == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             } else {

@@ -11,4 +11,6 @@ public interface ILocationService {
 
     LocationHotel getLocation(int idLocation);
 
+    List<Object> getValueChartLocations();
+
 }
