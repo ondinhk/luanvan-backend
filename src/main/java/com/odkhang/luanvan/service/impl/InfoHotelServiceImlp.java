@@ -19,7 +19,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
-
 @Service
 public class InfoHotelServiceImlp implements IInfoHotelService {
     @Autowired
@@ -63,7 +62,8 @@ public class InfoHotelServiceImlp implements IInfoHotelService {
     }
 
     private String[] getListIdHotelFromMachine(String input, String size, String idLocation) {
-        String url = "http://127.0.0.1:5000/recommend";
+//        String url = "http://python-machine:5000/recommend";
+        String url = "http://0.0.0.0:5000/recommend";
         try {
             URI uri = new URI(url);
         } catch (URISyntaxException e) {

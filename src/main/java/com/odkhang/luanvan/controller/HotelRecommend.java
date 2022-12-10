@@ -2,7 +2,9 @@ package com.odkhang.luanvan.controller;
 
 
 import com.odkhang.luanvan.model.InfoHotel;
+import com.odkhang.luanvan.model.RatingRecommend;
 import com.odkhang.luanvan.service.IInfoHotelService;
+import com.odkhang.luanvan.service.IRatingRecommend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +33,6 @@ public class HotelRecommend {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
 }
